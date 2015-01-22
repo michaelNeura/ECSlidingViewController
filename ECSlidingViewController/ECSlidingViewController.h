@@ -54,7 +54,7 @@
 @optional
 
 
-- (void)slidingViewController:(ECSlidingViewController *)slidingViewController startToChangePosition:(ECSlidingViewControllerTopViewPosition)position;
+- (void)slidingViewController:(ECSlidingViewController *)slidingViewController startToChangePosition:(ECSlidingViewControllerTopViewPosition)position withOperation:(ECSlidingViewControllerOperation)operation;
 
 /**
  Called to allow the delegate to return a non-interactive animator object for use during a transition.
