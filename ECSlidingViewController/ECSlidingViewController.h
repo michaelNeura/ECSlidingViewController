@@ -52,6 +52,10 @@
 @protocol ECSlidingViewControllerDelegate
 
 @optional
+
+
+- (void)slidingViewController:(ECSlidingViewController *)slidingViewController startToChangePosition:(ECSlidingViewControllerTopViewPosition)position;
+
 /**
  Called to allow the delegate to return a non-interactive animator object for use during a transition.
  

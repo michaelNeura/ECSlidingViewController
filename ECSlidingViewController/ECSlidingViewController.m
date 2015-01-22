@@ -446,6 +446,12 @@
 #pragma mark - Private
 
 - (void)moveTopViewToPosition:(ECSlidingViewControllerTopViewPosition)position animated:(BOOL)animated onComplete:(void(^)())complete {
+    
+    if (self.delegate && [(NSObject *)self.delegate respondsToSelector:@selector(slidingViewController:startToChangePosition:)])
+    {
+        [self.delegate slidingViewController:self startToChangePosition:position];
+    }
+    
     self.isAnimated = animated;
     self.animationComplete = complete;
     [self.view endEditing:YES];
