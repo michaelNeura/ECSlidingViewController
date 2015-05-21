@@ -42,7 +42,6 @@
 @property (nonatomic, assign) BOOL isAnimated;
 @property (nonatomic, assign) BOOL isInteractive;
 @property (nonatomic, assign) BOOL transitionInProgress;
-@property (nonatomic, copy) void (^animationComplete)();
 @property (nonatomic, copy) void (^coordinatorAnimations)(id<UIViewControllerTransitionCoordinatorContext>context);
 @property (nonatomic, copy) void (^coordinatorCompletion)(id<UIViewControllerTransitionCoordinatorContext>context);
 @property (nonatomic, copy) void (^coordinatorInteractionEnded)(id<UIViewControllerTransitionCoordinatorContext>context);
@@ -448,14 +447,15 @@
 - (void)moveTopViewToPosition:(ECSlidingViewControllerTopViewPosition)position animated:(BOOL)animated onComplete:(void(^)())complete {
 
     self.isAnimated = animated;
-    self.animationComplete = complete;
     [self.view endEditing:YES];
+    if (complete) {
+        self.animationComplete = complete;
+    }
     ECSlidingViewControllerOperation operation = [self operationFromPosition:self.currentTopViewPosition toPosition:position];
     if (self.delegate && [(NSObject *)self.delegate respondsToSelector:@selector(slidingViewController:startToChangePosition:withOperation:)])
     {
         [self.delegate slidingViewController:self startToChangePosition:position withOperation:operation];
     }
-
     [self animateOperation:operation];
 }
 
